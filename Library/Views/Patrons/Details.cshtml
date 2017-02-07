@@ -1,0 +1,41 @@
+﻿@model Library.Models.PatronViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Patron</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt> @Html.DisplayNameFor(model => model.Id) </dt>
+        <dd> @Html.DisplayFor(model => model.Id) </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Name) </dt>
+        <dd> @Html.DisplayFor(model => model.Name) </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Balance) </dt>
+        <dd> @Html.DisplayFor(model => model.Balance) </dd>
+    </dl>
+
+    <p>Holdings</p>
+    <table>
+            <tr>
+            <th>@Html.DisplayNameFor(modelItem => Model.Holdings.First().Barcode)</th>
+            <th>@Html.DisplayNameFor(modelItem => Model.Holdings.First().DueDate)</th>
+            </tr>
+        @foreach (var holding in Model.Holdings)
+        {
+            <tr>
+            <td>@Html.DisplayFor(modelItem => holding.Barcode)</td>
+            <td>@Html.DisplayFor(modelItem => holding.DueDate)</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

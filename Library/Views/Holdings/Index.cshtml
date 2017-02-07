@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Library.Models.HoldingViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Holdings</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th> @Html.DisplayNameFor(model => model.Classification) </th>
+        <th> @Html.DisplayNameFor(model => model.CopyNumber) </th>
+        <th> @Html.DisplayNameFor(model => model.CheckOutTimestamp) </th>
+        <th> @Html.DisplayNameFor(model => model.BranchName) </th>
+        <th> @Html.DisplayNameFor(model => model.HeldByPatronId) </th>
+        <th> @Html.DisplayNameFor(model => model.LastCheckedIn) </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td> @Html.DisplayFor(modelItem => item.Classification) </td>
+        <td> @Html.DisplayFor(modelItem => item.CopyNumber) </td>
+        <td> @Html.DisplayFor(modelItem => item.CheckOutTimestamp) </td>
+        <td> @Html.DisplayFor(modelItem => item.BranchName) </td>
+        <td> @Html.DisplayFor(modelItem => item.HeldByPatronId) </td>
+        <td> @Html.DisplayFor(modelItem => item.LastCheckedIn) </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

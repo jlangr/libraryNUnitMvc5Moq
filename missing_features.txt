@@ -1,0 +1,2 @@
+- when branch deleted, mark all holdings as checked-out
+- when patron deleted?

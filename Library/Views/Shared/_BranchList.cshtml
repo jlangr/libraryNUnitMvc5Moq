@@ -1,0 +1,8 @@
+﻿@model Library.Models._BranchesViewModel
+
+<div class="form-group">
+    @Html.LabelFor(model => model.SelectedBranch.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.SelectedBranch.Id, new SelectList(Model.Branches, "Id", "Name"));
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets  
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>  
+            <Title>NUnit test method</Title>  
+            <Shortcut>tm</Shortcut>        
+	</Header>
+        <Snippet>
+	    <Declarations>
+	        <Literal>
+	            <ID>testMethodName</ID>
+	            <ToolTip>Name for the test method</ToolTip>
+	            <Default>TestName</Default>
+	        </Literal>
+	        <Literal>
+	            <ID>code</ID>
+	            <ToolTip>Have at it!</ToolTip>
+	            <Default></Default>
+	        </Literal>
+	    </Declarations>
+            <Code Language="csharp">
+                <![CDATA[[Test]
+        public void $testMethodName$() 
+        {
+            $code$
+        }]]>  
+            </Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  
