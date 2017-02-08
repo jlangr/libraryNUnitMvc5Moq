@@ -9,7 +9,7 @@ After cloning this repo:
   - Open the `NuGet Package Manager->General` settings page.
   - Ensure that `Allow NuGet to download missing packages` is checkced.
   
-- Ensure that the `NUnit Test Adapter` is installed in Visual Studio. It is available from the Visual Studio Marketplace.
+- Ensure that the `NUnit 3 Test Adapter` is installed in Visual Studio. It is available from the Visual Studio Marketplace.
 - In Test Explorer:
   - Using the `Group By` dropdown toolbar button in the upper left, select Traits.
   - Click Run All.
