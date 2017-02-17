@@ -39,7 +39,7 @@ namespace LibraryTest.Library.Scanner
 
         void AlwaysReturnBookMaterial(Mock<IClassificationService> classificationService)
         {
-            classificationService.Setup(service => service.Retrieve(Moq.It.IsAny<string>()))
+            classificationService.Setup(service => service.Retrieve(It.IsAny<string>()))
                 .Returns(new Material() { CheckoutPolicy = new BookCheckoutPolicy() });
         }
 
