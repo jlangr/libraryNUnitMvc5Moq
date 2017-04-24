@@ -36,17 +36,16 @@ namespace LibraryTests.Library.Util
 
         [Ignore("")]
         [Test]
-        public void ReturnsLastFirstWhenFirstLastProvided()
+        public void ReturnsSingleWordName()
         {
-            Assert.That(normalizer.Normalize("Joseph Heller"), Is.EqualTo("Heller, Joseph"));
-            Assert.That(normalizer.Normalize("Haruki Murakami"), Is.EqualTo("Murakami, Haruki"));
+            Assert.That(normalizer.Normalize("Plato"), Is.EqualTo("Plato"));
         }
 
         [Ignore("")]
         [Test]
-        public void ReturnsSingleWordName()
+        public void ReturnsLastFirstWhenFirstLastProvided()
         {
-            Assert.That(normalizer.Normalize("Plato"), Is.EqualTo("Plato"));
+            Assert.That(normalizer.Normalize("Haruki Murakami"), Is.EqualTo("Murakami, Haruki"));
         }
 
         [Ignore("")]
