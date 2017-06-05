@@ -28,10 +28,10 @@ namespace Library.Reporting
             }
         }
 
-        MailMessage ConstructMailMessage(String toAddress, IReport report)
+        MailMessage ConstructMailMessage(string toAddress, IReport report)
         {
-            var content = report.Text();
-            var subject = report.Name();
+            var content = report.Text;
+            var subject = report.Name;
             var message = new MailMessage();
             message.To.Add(toAddress);
             message.Body = content;

@@ -2,7 +2,7 @@
 {
     public interface IReport
     {
-        string Text();
-        string Name();
+        string Text { get; }
+        string Name { get; }
     }
 }
