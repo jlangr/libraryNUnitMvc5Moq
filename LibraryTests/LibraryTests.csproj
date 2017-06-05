@@ -98,6 +98,8 @@
     <Compile Include="LibraryTest\Controllers\HoldingsControllerTest.cs" />
     <Compile Include="LibraryTest\Models\Repositories\BranchRepositoryExtensionsTest.cs" />
     <Compile Include="LibraryTest\Util\SoundexTest.cs" />
+    <Compile Include="LibraryTest\Util\StreamUtil.cs" />
+    <Compile Include="Reporting\FileReportTest.cs" />
     <Compile Include="VideoStore\CustomerTest.cs" />
     <Compile Include="LibraryTest\Controllers\PatronsControllerTest.cs" />
     <Compile Include="LibraryTest\Models\BookCheckoutPolicyTest.cs" />
