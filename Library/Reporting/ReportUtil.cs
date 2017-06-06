@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Library.Reporting
 {
@@ -6,7 +7,7 @@ namespace Library.Reporting
     {
         public enum StringOp
         {
-            Pad, Under
+            Pad, Under, Camel
         }
 
         public static string Transform(string x, int count, int spacing, ReportUtil.StringOp op)
@@ -14,34 +15,53 @@ namespace Library.Reporting
             var buffer = new StringBuilder();
             var buffer1 = new StringBuilder();
             string pads;
-            switch (op)
+            if (op == StringOp.Pad)
             {
-                case StringOp.Under:
-                    var i = 0;
-                    for (; i < count; i++)
-                        buffer.Append('-');
-                    var ptext = buffer.ToString();
-                    pads = "";
-                    buffer1.Append(ptext);
-                    var l = count + spacing - ptext.Length;
-                    for (int j = 0; j < l; j++)
+                pads = " ";
+                var l = spacing;
+                while (l > 1)
+                {
+                    pads = pads + " ";
+                    l = l - 1;
+                }
+                buffer.Append(x);
+                buffer.Append(pads);
+                buffer1.Append(buffer.ToString());
+            }
+            if (op == StringOp.Under)
+            {
+                var i = 0;
+                for (; i < count; i++)
+                    buffer.Append('-');
+                var ptext = buffer.ToString();
+                pads = "";
+                buffer1.Append(ptext);
+                var l = count + spacing - ptext.Length;
+                for (int j = 0; j < l; j++)
+                {
+                    pads += " ";
+                }
+                buffer1.Append(pads);
+            }
+            if (op == StringOp.Camel)
+            {
+                var m = 0;
+                bool lower = false;
+                for (; m < x.Length; m++)
+                {
+                    if (Char.IsWhiteSpace(x[m]))
                     {
-                        pads += " ";
+                        lower = false;
+                        buffer1.Append(x[m]);
                     }
-                    buffer1.Append(pads);
-                    break;
-                case StringOp.Pad:
-                    pads = " ";
-                    l = spacing;
-                    while (l > 1)
+                    else if (!lower)
                     {
-                        pads = pads + " ";
-                        l = l - 1;
+                        buffer1.Append(Char.ToUpper(x[m]));
+                        lower = true;
                     }
-                    buffer.Append(x);
-                    buffer.Append(pads);
-                    buffer1.Append(buffer.ToString());
-                    break;
+                    else
+                        buffer1.Append(x[m]);
+                }
             }
             return buffer1.ToString();
         }

@@ -234,11 +234,13 @@
     <Compile Include="POS\DisplayDevice.cs" />
     <Compile Include="POS\Purchase.cs" />
     <Compile Include="POS\Register.cs" />
+    <Compile Include="Reporting\Database.cs" />
     <Compile Include="Reporting\Endpoint.cs" />
     <Compile Include="Reporting\FileReport.cs" />
     <Compile Include="Reporting\InventoryReport.cs" />
     <Compile Include="Reporting\IReport.cs" />
     <Compile Include="Reporting\LibraryOfCongress.cs" />
+    <Compile Include="Reporting\LibraryQuery.cs" />
     <Compile Include="Reporting\MailDestination.cs" />
     <Compile Include="Reporting\Message.cs" />
     <Compile Include="Reporting\ReportMailer.cs" />
