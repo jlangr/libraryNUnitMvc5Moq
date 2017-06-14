@@ -231,6 +231,7 @@
       <DependentUpon>201702071643511_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Portfolio.cs" />
     <Compile Include="POS\DisplayDevice.cs" />
     <Compile Include="POS\Purchase.cs" />
     <Compile Include="POS\Register.cs" />
