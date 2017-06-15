@@ -20,7 +20,6 @@ namespace Library.Reporting
             this.filename = filename;
             // copy file from remote server
             var ftp = new FtpClient(FtpServer);
-            var error = false;
             try
             {
                 int reply;
@@ -31,8 +30,7 @@ namespace Library.Reporting
             }
             catch (Exception e)
             {
-                error = true;
-                Console.WriteLine("error!", e.StackTrace);
+                throw new Exception("unable to do it, ya!", e);
             }
             finally
             {
