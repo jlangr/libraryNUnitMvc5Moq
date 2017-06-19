@@ -1,6 +1,8 @@
-﻿using System;
+﻿/*
+using System;
 using NUnit.Framework;
 using Library.Util;
+*/
 
 // 0. Remove the multiline comment and make sure things compile.
 // 1. Un-ignore the next commented-out test method.
@@ -16,6 +18,7 @@ namespace LibraryTests.Library.Util
 {
     public class NameNormalizerTest
     {
+        /*
         private NameNormalizer normalizer;
 
         [SetUp]
@@ -24,54 +27,63 @@ namespace LibraryTests.Library.Util
             normalizer = new NameNormalizer();
         }
 
+        [Ignore("")]
         [Test]
         public void ReturnsEmptyStringWhenEmpty()
         {
             Assert.That(normalizer.Normalize(""), Is.EqualTo(""));
         }
 
+        [Ignore("")]
         [Test]
         public void ReturnsSingleWordName()
         {
             Assert.That(normalizer.Normalize("Plato"), Is.EqualTo("Plato"));
         }
 
+        [Ignore("")]
         [Test]
         public void ReturnsLastFirstWhenFirstLastProvided()
         {
             Assert.That(normalizer.Normalize("Haruki Murakami"), Is.EqualTo("Murakami, Haruki"));
         }
 
+        [Ignore("")]
         [Test]
         public void TrimsWhitespace()
         {
             Assert.That(normalizer.Normalize("  Big Boi   "), Is.EqualTo("Boi, Big"));
         }
 
+        [Ignore("")]
         [Test]
         public void InitializesMiddleName()
         {
             Assert.That(normalizer.Normalize("Henry David Thoreau"), Is.EqualTo("Thoreau, Henry D."));
         }
 
+        [Ignore("")]
         [Test]
         public void DoesNotInitializeOneLetterMiddleName()
         {
             Assert.That(normalizer.Normalize("Harry S Truman"), Is.EqualTo("Truman, Harry S"));
         }
 
+        [Ignore("")]
         [Test]
         public void InitializesEachOfMultipleMiddleNames()
         {
             Assert.That(normalizer.Normalize("Julia Scarlett Elizabeth Louis-Dreyfus"), Is.EqualTo("Louis-Dreyfus, Julia S. E."));
         }
 
+        [Ignore("")]
         [Test]
         public void AppendsSuffixesToEnd()
         {
             Assert.That(normalizer.Normalize("Martin Luther King, Jr."), Is.EqualTo("King, Martin L., Jr."));
         }
 
+        [Ignore("")]
         [Test]
         public void ThrowsWhenNameContainsTwoCommas()
         {
@@ -79,10 +91,12 @@ namespace LibraryTests.Library.Util
             Assert.That(exception.Message, Is.EqualTo("name can have at most one comma"));
         }
 
+        [Ignore("")]
         [Test]
         public void OneWordNamesCanHaveSuffixes()
         {
             Assert.That(normalizer.Normalize("Madonna, Jr."), Is.EqualTo("Madonna, Jr."));
         }
+        */
     }
 }

@@ -97,7 +97,6 @@
     <Compile Include="LibraryTest\Controllers\CheckOutControllerTest.cs" />
     <Compile Include="LibraryTest\Controllers\HoldingsControllerTest.cs" />
     <Compile Include="LibraryTest\Models\Repositories\BranchRepositoryExtensionsTest.cs" />
-    <Compile Include="LibraryTest\Util\APortfolio.cs" />
     <Compile Include="LibraryTest\Util\SoundexTest.cs" />
     <Compile Include="LibraryTest\Util\StreamUtil.cs" />
     <Compile Include="Reporting\FileReportTest.cs" />
