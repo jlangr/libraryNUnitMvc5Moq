@@ -12,7 +12,18 @@ namespace Library.Util
             Transactions = new List<Transaction>();
         }
 
+        public int Shares
+        {
+            get
+            {
+                return Transactions
+                    .Select(t => t.Shares)
+                    .Sum();
+            }
+        }
+
         public string Symbol { get; set; }
+
         private IList<Transaction> Transactions { get; set; }
 
         public void Add(Transaction transaction)

@@ -79,10 +79,7 @@ namespace Library.Util
 
         public int Shares(string symbol)
         {
-            return Transactions
-                .Where(t => t.Symbol == symbol)
-                .Select(t => t.Shares)
-                .Sum();
+            return HoldingForSymbol(symbol).Shares;
         }
     }
 }
