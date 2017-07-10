@@ -9,9 +9,12 @@ namespace Library.Util
         public Portfolio()
         {
             Transactions = new List<Transaction>();
+            Holdings = new Dictionary<string, StockHolding>();
         }
 
         public bool IsEmpty { get { return UniqueSymbolCount == 0; } }
+
+        private IDictionary<string, StockHolding> Holdings { get; set; }
 
         public int UniqueSymbolCount
         {
@@ -47,7 +50,20 @@ namespace Library.Util
 
         private void Transact(string symbol, int shares)
         {
-            Transactions.Add(new Transaction(symbol, shares, TimeService.Now));
+            var transaction = new Transaction(symbol, shares, TimeService.Now);
+            Transactions.Add(transaction);
+
+            HoldingForSymbol(symbol).Add(transaction);
+        }
+
+        private StockHolding HoldingForSymbol(string symbol)
+        {
+            if (Holdings.ContainsKey(symbol))
+                return Holdings[symbol];
+
+            var holding = new StockHolding(symbol);
+            Holdings[symbol] = holding;
+            return holding;
         }
 
         public void Purchase(string symbol, int shares)
