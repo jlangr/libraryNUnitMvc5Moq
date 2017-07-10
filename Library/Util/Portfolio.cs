@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Library.Util
 {
     public class Portfolio
     {
         public Portfolio() {
-            Holdings = new Dictionary<string,int>();
             Transactions = new List<Transaction>();
         }
-        private IDictionary<string,int> Holdings { get; set; }
         public bool IsEmpty { get { return UniqueSymbolCount == 0;  } }
-        public int UniqueSymbolCount { get { return Holdings.Count; } }
+        public int UniqueSymbolCount {
+            get
+            {
+                return Transactions
+                    .Select(t => t.Symbol)
+                    .Distinct()
+                    .Count();
+            }
+        }
 
         private IList<Transaction> Transactions { get; set; }
 
@@ -38,7 +43,6 @@ namespace Library.Util
 
         private void Transact(string symbol, int shares)
         {
-            Holdings[symbol] = Shares(symbol) + shares;
             Transactions.Add(new Transaction(symbol, shares, TimeService.Now));
         }
 
