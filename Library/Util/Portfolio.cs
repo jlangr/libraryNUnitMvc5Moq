@@ -8,7 +8,6 @@ namespace Library.Util
     {
         public Portfolio()
         {
-            Transactions = new List<Transaction>();
             Holdings = new Dictionary<string, StockHolding>();
         }
 
@@ -20,8 +19,6 @@ namespace Library.Util
         {
             get { return Holdings.Count(); }
         }
-
-        private IList<Transaction> Transactions { get; set; }
 
         public DateTime DateOfLastTransaction
         {
@@ -37,11 +34,7 @@ namespace Library.Util
         {
             var now = TimeService.Now;
             DateOfLastTransaction = now;
-            var transaction = new Transaction(symbol, shares, now);
-            // TODO delete me ASAP
-            Transactions.Add(transaction);
-
-            HoldingForSymbol(symbol).Add(transaction);
+            HoldingForSymbol(symbol).Add(new Transaction(symbol, shares, now));
         }
 
         private StockHolding HoldingForSymbol(string symbol)
