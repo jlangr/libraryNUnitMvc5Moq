@@ -18,13 +18,7 @@ namespace Library.Util
 
         public int UniqueSymbolCount
         {
-            get
-            {
-                return Transactions
-                    .Select(t => t.Symbol)
-                    .Distinct()
-                    .Count();
-            }
+            get { return Holdings.Count(); }
         }
 
         private IList<Transaction> Transactions { get; set; }
@@ -36,10 +30,7 @@ namespace Library.Util
 
         public DateTime LastTransactionDate(string symbol)
         {
-            return Transactions
-                .Reverse()
-                .First(t => t.Symbol == symbol)
-                .Date;
+            return HoldingForSymbol(symbol).LastTransactionDate();
         }
 
         private void Transact(string symbol, int shares)
@@ -47,6 +38,7 @@ namespace Library.Util
             var now = TimeService.Now;
             DateOfLastTransaction = now;
             var transaction = new Transaction(symbol, shares, now);
+            // TODO delete me ASAP
             Transactions.Add(transaction);
 
             HoldingForSymbol(symbol).Add(transaction);
