@@ -249,6 +249,7 @@
     <Compile Include="Reporting\ReportUtil.cs" />
     <Compile Include="Util\Portfolio.cs" />
     <Compile Include="Util\Soundex.cs" />
+    <Compile Include="Util\Transaction.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\BookCheckoutPolicy.cs" />
     <Compile Include="Models\Branch.cs" />

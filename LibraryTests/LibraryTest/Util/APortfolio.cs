@@ -134,5 +134,17 @@ namespace LibraryTests.LibraryTest.Util
 
             Assert.That(portfolio.DateOfLastTransaction, Is.EqualTo(timestamp));
         }
+
+        [Test]
+        public void AnswersDateOfLastTransactionBySymbol()
+        {
+            TimeService.NextTime = new DateTime(2018, 1, 1);
+            portfolio.Purchase("RELX", 30);
+            TimeService.NextTime = new DateTime(2018, 1, 2);
+            portfolio.Purchase("IBM", 40);
+
+            Assert.That(portfolio.LastTransactionDate("RELX"), 
+                Is.EqualTo(new DateTime(2018, 1, 1)));
+        }
     }
 }
