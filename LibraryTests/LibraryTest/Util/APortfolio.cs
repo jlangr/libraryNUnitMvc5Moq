@@ -115,12 +115,24 @@ namespace LibraryTests.LibraryTest.Util
             Assert.Throws<InvalidTransactionException>(
                 () => portfolio.Purchase("RELX", shares));
         }
+
         [Test]
         public void ThrowsWhenSellingSymbolNotPurchased()
         {
             var exception = Assert.Throws<InvalidTransactionException>(
                 () => portfolio.Sell("RELX", 10));
             Assert.That(exception.Message, Is.EqualTo("symbol not held"));
+        }
+
+        [Test]
+        public void ReturnsDateOfLastTransaction()
+        {
+            var timestamp = new DateTime(2018, 3, 15);
+            TimeService.NextTime = timestamp;
+
+            portfolio.Purchase("RELX", 30);
+
+            Assert.That(portfolio.DateOfLastTransaction, Is.EqualTo(timestamp));
         }
     }
 }
