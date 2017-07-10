@@ -27,6 +27,7 @@ namespace Library.Util
                     .Date;
             }
         }
+
         public DateTime LastTransactionDate(string symbol)
         {
             return Transactions
@@ -66,8 +67,10 @@ namespace Library.Util
 
         public int Shares(string symbol)
         {
-            if (!Holdings.ContainsKey(symbol)) return 0;
-            return Holdings[symbol];
+            return Transactions
+                .Where(t => t.Symbol == symbol)
+                .Select(t => t.Shares)
+                .Sum();
         }
     }
 }
