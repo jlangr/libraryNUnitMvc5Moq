@@ -6,11 +6,15 @@ namespace Library.Util
 {
     public class Portfolio
     {
-        public Portfolio() {
+        public Portfolio()
+        {
             Transactions = new List<Transaction>();
         }
-        public bool IsEmpty { get { return UniqueSymbolCount == 0;  } }
-        public int UniqueSymbolCount {
+
+        public bool IsEmpty { get { return UniqueSymbolCount == 0; } }
+
+        public int UniqueSymbolCount
+        {
             get
             {
                 return Transactions
