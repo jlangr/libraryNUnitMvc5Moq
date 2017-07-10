@@ -31,13 +31,7 @@ namespace Library.Util
 
         public DateTime DateOfLastTransaction
         {
-            get
-            {
-                return Transactions
-                    .Reverse()
-                    .First()
-                    .Date;
-            }
+            get; private set;
         }
 
         public DateTime LastTransactionDate(string symbol)
@@ -50,7 +44,9 @@ namespace Library.Util
 
         private void Transact(string symbol, int shares)
         {
-            var transaction = new Transaction(symbol, shares, TimeService.Now);
+            var now = TimeService.Now;
+            DateOfLastTransaction = now;
+            var transaction = new Transaction(symbol, shares, now);
             Transactions.Add(transaction);
 
             HoldingForSymbol(symbol).Add(transaction);
