@@ -9,6 +9,7 @@ namespace Library.Util
         public Portfolio()
         {
             Holdings = new Dictionary<string, StockHolding>();
+            StockService = new NASDAQService();
         }
 
         public bool IsEmpty { get { return UniqueSymbolCount == 0; } }
@@ -74,5 +75,16 @@ namespace Library.Util
         {
             return HoldingForSymbol(symbol).Shares;
         }
+
+        public decimal Value {
+            get {
+                var total = 0m;
+                foreach (var symbol in Holdings.Keys)
+                    total += StockService.Price(symbol) * Shares(symbol);
+                return total;
+            }
+        }
+
+        public IStockService StockService { get; set; }
     }
 }

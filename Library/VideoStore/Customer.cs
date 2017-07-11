@@ -7,16 +7,13 @@ namespace Library.VideoStore
     {
         private readonly string name;
         private readonly IList<Rental> rentals = new List<Rental>();
+        readonly string EOL = Environment.NewLine;
         private int frequentRenterPoints;
+        private decimal totalPrice;
 
         public Customer(string name)
         {
             this.name = name;
-        }
-
-        public void Add(Rental rental)
-        {
-            rentals.Add(rental);
         }
 
         public string Name
@@ -24,51 +21,84 @@ namespace Library.VideoStore
             get { return name; }
         }
 
+        public void Add(Rental rental)
+        {
+            rentals.Add(rental);
+            CacheIntoOtherwiseCalculatedTotals(rental);
+        }
+
+        private void CacheIntoOtherwiseCalculatedTotals(Rental rental)
+        {
+            // this is optimized caching for performance purposes!
+            frequentRenterPoints += FrequentRenterPoints(rental);
+            totalPrice += Price(rental);
+        }
+
         public string Statement()
         {
-            var totalAmount = 0.0m;
-            var result = "Rental Record for " + Name + Environment.NewLine;
-
-            foreach (var each in rentals)
-            {
-                decimal thisAmount = 0;
-
-                // determines the amount for each line
-                switch (each.Movie.PriceCode)
-                {
-                    case Movie.Regular:
-                        thisAmount += 2;
-                        if (each.DaysRented > 2)
-                            thisAmount += (each.DaysRented - 2) * 1.5m;
-                        break;
-                    case Movie.NewRelease:
-                        thisAmount += each.DaysRented * 3m;
-                        break;
-                    case Movie.Childrens:
-                        thisAmount += 1.5m;
-                        if (each.DaysRented > 3)
-                            thisAmount += (each.DaysRented - 3) * 1.5m;
-                        break;
-                }
-
-                frequentRenterPoints++;
-
-                if (each.Movie.PriceCode == Movie.NewRelease
-                        && each.DaysRented > 1)
-                    frequentRenterPoints++;
-
-                result += "\t" + each.Movie.Title + "\t"
-                                    + thisAmount.ToString("N2") + Environment.NewLine;
-                totalAmount += thisAmount;
-            }
-
-            result += "You owed " + totalAmount.ToString("N2") + 
-                Environment.NewLine;
-            result += "You earned " + 
-                frequentRenterPoints + " frequent renter points" + 
-                Environment.NewLine;
-
+            var result = Header();
+            foreach (var rental in rentals)
+                result += Detail(rental);
+            result += TotalPriceFooter();
+            result += TotalFreqRenterPointsFooter();
             return result;
+        }
+        private int TotalFrequentRenterPoints()
+        {
+            return frequentRenterPoints;
+        }
+        private decimal CalculateTotalPrice()
+        {
+            return totalPrice;
+        }
+
+        private string TotalFreqRenterPointsFooter()
+        {
+            return "You earned " + TotalFrequentRenterPoints() + " frequent renter points" + EOL;
+        }
+        private string TotalPriceFooter()
+        {
+            return "You owed " + CalculateTotalPrice().ToString("N2") + EOL;
+        }
+
+        private string Detail(Rental rental)
+        {
+            return "\t" + rental.Movie.Title + "\t" + Price(rental).ToString("N2") + Environment.NewLine;
+        }
+
+        private string Header()
+        {
+            return "Rental Record for " + Name + Environment.NewLine;
+        }
+
+        private int FrequentRenterPoints(Rental rental)
+        {
+            var frequentRenterPoints = 1;
+            if (rental.Movie.PriceCode == Movie.NewRelease && rental.DaysRented > 1)
+                frequentRenterPoints++;
+            return frequentRenterPoints;
+        }
+
+        private decimal Price(Rental rental)
+        {
+            var price = 0m;
+            switch (rental.Movie.PriceCode)
+            {
+                case Movie.Regular:
+                    price += 2;
+                    if (rental.DaysRented > 2)
+                        price += (rental.DaysRented - 2) * 1.5m;
+                    break;
+                case Movie.NewRelease:
+                    price += rental.DaysRented * 3m;
+                    break;
+                case Movie.Childrens:
+                    price += 1.5m;
+                    if (rental.DaysRented > 3)
+                        price += (rental.DaysRented - 3) * 1.5m;
+                    break;
+            }
+            return price;
         }
     }
 }

@@ -96,7 +96,7 @@ namespace LibraryTests.LibraryTest.Util
             portfolio.Purchase("RELX", 30);
             portfolio.Sell("RELX", 12);
 
-            Assert.That(portfolio.Shares("RELX"), Is.EqualTo(18));
+            Assert.That(portfolio.Shares("RELX"), Is.EqualTo(30 - 12));
         }
 
         [Test]
@@ -145,6 +145,55 @@ namespace LibraryTests.LibraryTest.Util
 
             Assert.That(portfolio.LastTransactionDate("RELX"), 
                 Is.EqualTo(new DateTime(2018, 1, 1)));
+        }
+
+        [Test]
+        public void IsWorthlessBeforeAnyPurchase()
+        {
+            Assert.That(portfolio.Value, Is.Zero);
+        }
+
+        class StubStockService : IStockService
+        {
+            public const decimal RelxCurrentPrice = 250.0m;
+            public const decimal IbmCurrentPrice = 125.0m;
+            public decimal Price(string symbol)
+            {
+                if (symbol == "IBM") return IbmCurrentPrice;
+                else if (symbol == "RELX") return RelxCurrentPrice;
+                throw new Exception("unrecognized symbol");
+            }
+        }
+
+
+        [Test]
+        public void ValueForSingleSharePurchaseIsSymbolPrice()
+        {
+            portfolio.StockService = new StubStockService();
+            portfolio.Purchase("RELX", 1);
+
+            Assert.That(portfolio.Value, Is.EqualTo(StubStockService.RelxCurrentPrice));
+        }
+
+        [Test]
+        public void ValueMultipliesPriceBySharesPurchased()
+        {
+            portfolio.StockService = new StubStockService();
+            portfolio.Purchase("RELX", 10);
+
+            Assert.That(portfolio.Value, Is.EqualTo(10 * StubStockService.RelxCurrentPrice));
+        }
+
+        [Test]
+        public void ValueSumsTotalOfAllSymbolValues()
+        {
+            portfolio.StockService = new StubStockService();
+            portfolio.Purchase("RELX", 10);
+            portfolio.Purchase("IBM", 20);
+
+            Assert.That(portfolio.Value, Is.EqualTo(
+                10 * StubStockService.RelxCurrentPrice
+              + 20 * StubStockService.IbmCurrentPrice));
         }
     }
 }

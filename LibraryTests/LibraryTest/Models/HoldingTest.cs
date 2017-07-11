@@ -67,7 +67,8 @@ namespace LibraryTest.Library.Models
         [Test]
         public void GenBarcode()
         {
-            Assert.That(Holding.GenerateBarcode("QA234", 3), Is.EqualTo(ExpectedBarcode));
+            Assert.That(Holding.GenerateBarcode("QA234", 3), 
+                Is.EqualTo("QA234:3"));
         }
 
         [Test]

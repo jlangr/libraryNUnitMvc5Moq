@@ -246,10 +246,12 @@
     <Compile Include="Reporting\ReportMailer.cs" />
     <Compile Include="Util\Holding.cs" />
     <Compile Include="Util\InvalidTransactionException.cs" />
+    <Compile Include="Util\NASDAQService.cs" />
     <Compile Include="Util\NotYetImpementedException.cs" />
     <Compile Include="Reporting\ReportUtil.cs" />
     <Compile Include="Util\Portfolio.cs" />
     <Compile Include="Util\Soundex.cs" />
+    <Compile Include="Util\StockService.cs" />
     <Compile Include="Util\Transaction.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\BookCheckoutPolicy.cs" />

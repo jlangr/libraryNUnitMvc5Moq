@@ -62,40 +62,40 @@ namespace Library.Scanner
         {
             var cl = Holding.ClassificationFromBarcode(bc);
             var cn = Holding.CopyNumberFromBarcode(bc);
-            var h = HoldingsControllerUtil.FindByBarcode(holdingRepo, bc);
+            var holding = HoldingsControllerUtil.FindByBarcode(holdingRepo, bc);
 
-            if (h.IsCheckedOut)
+            if (holding.IsCheckedOut)
             {
-                if (cur == NoPatron)
+                if (NoCurrentPatronCardScanned())
                 { // ci
-                    bc = h.Barcode;
-                    var patronId = h.HeldByPatronId;
+                    bc = holding.Barcode;
+                    var patronId = holding.HeldByPatronId;
                     var cis = TimeService.Now;
                     Material m = null;
-                    m = classificationService.Retrieve(h.Classification);
-                    var fine = m.CheckoutPolicy.FineAmount(h.CheckOutTimestamp.Value, cis);
+                    m = classificationService.Retrieve(holding.Classification);
+                    var fine = m.CheckoutPolicy.FineAmount(holding.CheckOutTimestamp.Value, cis);
                     var p = patronRepo.GetByID(patronId);
                     p.Fine(fine);
                     patronRepo.Save(p);
-                    h.CheckIn(cis, brId);
-                    holdingRepo.Save(h);
+                    holding.CheckIn(cis, brId);
+                    holdingRepo.Save(holding);
                 }
                 else
                 {
-                    if (h.HeldByPatronId != cur) // check out book already cked-out
+                    if (CurrentPatronDoesNotHold(holding)) // check out book already cked-out
                     {
-                        var bc1 = h.Barcode;
+                        var bc1 = holding.Barcode;
                         var n = TimeService.Now;
                         var t = TimeService.Now.AddDays(21);
-                        var f = classificationService.Retrieve(h.Classification).CheckoutPolicy.FineAmount(h.CheckOutTimestamp.Value, n);
-                        var patron = patronRepo.GetByID(h.HeldByPatronId);
+                        var f = classificationService.Retrieve(holding.Classification).CheckoutPolicy.FineAmount(holding.CheckOutTimestamp.Value, n);
+                        var patron = patronRepo.GetByID(holding.HeldByPatronId);
                         patron.Fine(f);
                         patronRepo.Save(patron);
-                        h.CheckIn(n, brId);
-                        holdingRepo.Save(h);
+                        holding.CheckIn(n, brId);
+                        holdingRepo.Save(holding);
                         // co
-                        h.CheckOut(n, cur, CheckoutPolicies.BookCheckoutPolicy);
-                        holdingRepo.Save(h);
+                        holding.CheckOut(n, cur, CheckoutPolicies.BookCheckoutPolicy);
+                        holdingRepo.Save(holding);
                         // call check out controller(cur, bc1);
                         t.AddDays(1);
                         n = t;
@@ -110,12 +110,22 @@ namespace Library.Scanner
             {
                 if (cur != NoPatron) // check in book
                 {
-                    h.CheckOut(cts, cur, CheckoutPolicies.BookCheckoutPolicy);
-                    holdingRepo.Save(h);
+                    holding.CheckOut(cts, cur, CheckoutPolicies.BookCheckoutPolicy);
+                    holdingRepo.Save(holding);
                 }
                 else
                     throw new CheckoutException();
             }
+        }
+
+        private bool CurrentPatronDoesNotHold(Holding h)
+        {
+            return h.HeldByPatronId != cur;
+        }
+
+        private bool NoCurrentPatronCardScanned()
+        {
+            return cur == NoPatron;
         }
 
         public void CompleteCheckout()
