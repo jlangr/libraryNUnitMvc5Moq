@@ -29,6 +29,7 @@ namespace Library.Reporting
 
         public void Send(MailMessage message)
         {
+            #pragma warning disable CS0618
             var smtp = new SmtpClient(Get(SmtpServer))
             {
                 Credentials = new NetworkCredential(Get(SmtpUser), Get(SmtpPassword))

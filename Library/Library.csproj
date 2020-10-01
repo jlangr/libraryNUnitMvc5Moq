@@ -27,8 +27,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugSymbols>false</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -36,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -89,7 +87,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
+<!--    <Reference Include="System.Web.Entity" /> -->
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -250,6 +248,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\BookCheckoutPolicy.cs" />
     <Compile Include="Models\Branch.cs" />
+    <Compile Include="ViewModels\BranchesViewModel.cs" />
     <Compile Include="ViewModels\CheckInViewModel.cs" />
     <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\PatronViewModel.cs" />
@@ -310,6 +309,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\CheckIn\Index.cshtml" />
+    <Content Include="Views\Patrons\Holdings.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

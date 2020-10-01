@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Library.Models;
 
-namespace Library.Models
+namespace Library.ViewModels
 {
     [NotMapped]
     public class PatronViewModel: Patron

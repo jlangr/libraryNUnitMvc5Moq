@@ -4,15 +4,16 @@ using Library.Models.Repositories;
 using System.Web.Mvc;
 using Library.Util;
 using Library.ControllerHelpers;
+using Library.ViewModels;
 
 namespace Library.Controllers
 {
     public class CheckInController: Controller
     {
         public const string ModelKey = "CheckIn";
-        private IRepository<Branch> branchRepo;
-        private IRepository<Holding> holdingRepo;
-        private IRepository<Patron> patronRepo;
+        private readonly IRepository<Branch> branchRepo;
+        private readonly IRepository<Holding> holdingRepo;
+        private readonly IRepository<Patron> patronRepo;
 
         public CheckInController(IRepository<Branch> branchRepo, IRepository<Holding> holdingRepo, IRepository<Patron> patronRepo)
         {

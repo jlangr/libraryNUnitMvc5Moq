@@ -6,6 +6,7 @@ using Library.Extensions.SystemWebMvcController;
 using Library.Models;
 using Library.Models.Repositories;
 using Library.ControllerHelpers;
+using Library.ViewModels;
 
 namespace LibraryTest.Library.Controllers
 {

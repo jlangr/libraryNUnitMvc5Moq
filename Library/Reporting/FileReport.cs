@@ -22,7 +22,7 @@ namespace Library.Reporting
             var ftp = new FtpClient(FtpServer);
             try
             {
-                int reply;
+//                int reply;
                 ftp.Credentials = new NetworkCredential("ftp", "");
                 ftp.Connect();
                 ftp.DownloadFile(@"c:\\temp\{this.filename}", this.filename);

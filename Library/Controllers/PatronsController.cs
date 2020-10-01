@@ -3,13 +3,14 @@ using System.Web.Mvc;
 using Library.Models;
 using Library.Models.Repositories;
 using System.Collections.Generic;
+using Library.ViewModels;
 
 namespace Library.Controllers
 {
     public class PatronsController : Controller
     {
-        IRepository<Patron> patronRepo;
-        IRepository<Holding> holdingRepo;
+        readonly IRepository<Patron> patronRepo;
+        readonly IRepository<Holding> holdingRepo;
 
         public PatronsController()
         {
@@ -36,8 +37,6 @@ namespace Library.Controllers
         }
 
         // POST: Patrons/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Balance")] Patron patron)
@@ -87,8 +86,6 @@ namespace Library.Controllers
         }
 
         // POST: Patrons/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Balance")] Patron patron)

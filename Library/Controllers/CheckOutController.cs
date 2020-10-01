@@ -10,9 +10,9 @@ namespace Library.Controllers
     public class CheckOutController : Controller
     {
         public const string ModelKey = "CheckOut";
-        private IRepository<Branch> branchRepo;
-        private IRepository<Holding> holdingRepo;
-        private IRepository<Patron> patronRepo;
+        private readonly IRepository<Branch> branchRepo;
+        private readonly IRepository<Holding> holdingRepo;
+        private readonly IRepository<Patron> patronRepo;
 
         public CheckOutController()
         {

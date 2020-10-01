@@ -6,6 +6,7 @@ using Library.Util;
 using NUnit.Framework;
 using System;
 using System.Web.Mvc;
+using Library.ViewModels;
 
 namespace LibraryTest.Library.Controllers
 {

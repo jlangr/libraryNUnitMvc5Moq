@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
@@ -66,6 +67,8 @@ namespace Library.Models
         {
             get { return BranchId == Branch.CheckedOutId; }
         }
+
+        public IEnumerable BranchesViewList { get; set; }
 
         public void CheckIn(DateTime timestamp, int toBranchId)
         {

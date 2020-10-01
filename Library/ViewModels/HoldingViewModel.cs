@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using Library.Models;
 
-namespace Library.Models
+namespace Library.ViewModels
 {
     [NotMapped]
     public class HoldingViewModel: Holding
@@ -20,8 +21,6 @@ namespace Library.Models
             this.HeldByPatronId = holding.HeldByPatronId;
         }
 
-        [NotMapped]
-        public List<Branch> BranchesViewList { get; set; }
         [NotMapped, DisplayName("Branch")]
         public string BranchName { get; set; }
     }

@@ -5,14 +5,15 @@ using System.Linq;
 using Library.Models;
 using Library.Models.Repositories;
 using Library.ControllerHelpers;
+using Library.ViewModels;
 
 namespace Library.Controllers
 {
     public class HoldingsController : Controller
     {
         public const string ModelKey = "Holdings";
-        private IRepository<Holding> holdingRepo;
-        private IRepository<Branch> branchRepo;
+        private readonly IRepository<Holding> holdingRepo;
+        private readonly IRepository<Branch> branchRepo;
 
         public HoldingsController()
         {
@@ -90,8 +91,6 @@ namespace Library.Controllers
         }
 
         // POST: Holdings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Classification,CopyNumber,CheckOutTimestamp,BranchId,HeldByPatronId,LastCheckedIn")] Holding holding)

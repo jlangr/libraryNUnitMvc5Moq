@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
 using Library.Models;
 using Library.Models.Repositories;
+using NUnit.Framework;
 
-namespace LibraryTests.Models.Repositories
+namespace LibraryTests.LibraryTest.Models.Repositories
 {
     [TestFixture]
     public class InMemoryRepositoryTest
@@ -12,7 +12,8 @@ namespace LibraryTests.Models.Repositories
         private X x;
         private InMemoryRepository<X> repo;
 
-        [Serializable] class X : Identifiable {
+        [Serializable]
+        private class X : Identifiable {
             public int Id { get; set; }
             public string Name { get; set; }
         };
@@ -37,7 +38,7 @@ namespace LibraryTests.Models.Repositories
         {
             repo.Create(x);
 
-            int id = repo.Create(x);
+            var id = repo.Create(x);
 
             Assert.That(id, Is.EqualTo(2));
         }
@@ -47,7 +48,7 @@ namespace LibraryTests.Models.Repositories
         {
             var id = repo.Create(x);
 
-            X retrieved = repo.GetByID(id);
+            var retrieved = repo.GetByID(id);
 
             Assert.That(retrieved, Is.Not.SameAs(x));
         }
@@ -55,12 +56,12 @@ namespace LibraryTests.Models.Repositories
         [Test]
         public void FindsUsingLambda()
         {
-            X alpha = new X { Name = "alpha" };
-            X beta = new X { Name = "beta" };
+            var alpha = new X { Name = "alpha" };
+            var beta = new X { Name = "beta" };
             repo.Create(alpha);
-            int betaId = repo.Create(beta);
+            var betaId = repo.Create(beta);
 
-            X retrieved = repo.Get(x => x.Name == "beta");
+            var retrieved = repo.Get(each => each.Name == "beta");
 
             Assert.That(retrieved.Id, Is.EqualTo(betaId));
         }
