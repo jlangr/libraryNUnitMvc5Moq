@@ -21,6 +21,11 @@ namespace Library.Models
         {
         }
 
+        public override string ToString()
+        {
+            return $"{Classification}:{CopyNumber}:{BranchId}";
+        }
+
         public Holding(string classification, int copyNumber, int branchId)
         {
             CheckOutTimestamp = null;
@@ -37,6 +42,30 @@ namespace Library.Models
         }
 
         public int Id { get; set; }
+
+        protected bool Equals(Holding other)
+        {
+            return Classification == other.Classification && CopyNumber == other.CopyNumber && BranchId == other.BranchId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Holding) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Classification != null ? Classification.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ CopyNumber;
+                hashCode = (hashCode * 397) ^ BranchId;
+                return hashCode;
+            }
+        }
 
         public string Classification { get; set; }
 
@@ -94,7 +123,7 @@ namespace Library.Models
 
         public static string GenerateBarcode(string classification, int copyNumber)
         {
-            return string.Format("{0}:{1}", classification, copyNumber);
+            return $"{classification}:{copyNumber}";
         }
 
         public static string ClassificationFromBarcode(string barcode)

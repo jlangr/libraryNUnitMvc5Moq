@@ -8,12 +8,12 @@ namespace LibraryTests.Library.Models.Repositories
     [TestFixture, Category("slow")]
     public class HoldingRepositoryTest
     {
-        EntityRepository<Holding> repo;
+        InMemoryRepository<Holding> repo;
 
         [SetUp]
         public void Create()
         {
-            repo = new EntityRepository<Holding>(db => db.Holdings);
+            repo = new InMemoryRepository<Holding>(); //db => db.Holdings);
             repo.Clear();
         }
 
